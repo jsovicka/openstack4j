@@ -3,6 +3,7 @@ package org.openstack4j.core.transport.internal;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
+import java.util.logging.Logger;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -21,6 +22,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.annotate.JsonRootName;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.glassfish.jersey.filter.LoggingFilter;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.openstack4j.core.transport.ClientConstants;
 
@@ -50,6 +52,7 @@ class ClientFactory {
 			clientStrict = ClientBuilder.newBuilder()
 					 									.register(JacksonFeature.class)
 					 									.register(RESOLVER)
+                                                                                                                .register(new LoggingFilter(Logger.getGlobal(), true))
 					 									.register(new RequestFilter())
 					 									.build();
 		}
@@ -75,7 +78,8 @@ class ClientFactory {
 			ClientBuilder cb = ClientBuilder.newBuilder()
 					.register(JacksonFeature.class)
 					.register(RESOLVER)
-					.register(new RequestFilter());
+                                        .register(new LoggingFilter(Logger.getGlobal(), true))
+					.register(new RequestFilter());                                        
 			
 			try
 			{
