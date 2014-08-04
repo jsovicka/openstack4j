@@ -255,5 +255,12 @@ public class NovaServerCreate implements ServerCreate {
                         m.blockDeviceMapping.add(blockDevice);
                         return this;
                 }
+
+                @Override
+                public ServerCreateBuilder userData(String userData) {
+                        m.userData = userData;
+                        return this;
+                }
+                
 	}
 }

@@ -71,5 +71,13 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
 	ServerCreateBuilder keypairName(String name);
         
         ServerCreateBuilder blockDevice(BlockDeviceMappingCreate blockDevice);
+        
+        /**
+         * Adds user data to server
+         * 
+         * @param userData
+         * @return 
+         */
+        ServerCreateBuilder userData(String userData);
 	
 }
